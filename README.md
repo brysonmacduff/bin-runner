@@ -1,3 +1,7 @@
+* Author: Bryson MacDuff
+* Edit Date: 2024-09-29
+* Description: This repository builds a docker image that is meant to run a list of binaries.
+
 * Build Image
     * docker build -t bin-runner -f Dockerfile .
 * Run Container
