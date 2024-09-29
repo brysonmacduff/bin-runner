@@ -7,6 +7,6 @@
 * Configuration Guide
     * Debian files in the "debians" directory will be installed when the image is built.
     * Add bash commands to use the debian packages in the "startup_binaries.sh" script.
-* Debian Package Repositories
+* Debian Package C++ Repositories
     * https://github.com/brysonmacduff/cpp-template
     * https://github.com/brysonmacduff/element-manager
