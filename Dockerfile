@@ -12,4 +12,4 @@ RUN mkdir tmp/scripts
 COPY ./scripts ./tmp/scripts
 RUN chmod -R 755 ./tmp/scripts
 
-ENTRYPOINT ["bin/bash"]
+ENTRYPOINT ["./tmp/scripts/start.sh"]
