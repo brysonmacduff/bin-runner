@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
 RUN apt update -y
+RUN apt install -y nano
 
 # copy in local debian packages to the image and install them
 RUN mkdir tmp/debians
@@ -12,4 +13,6 @@ RUN mkdir tmp/scripts
 COPY ./scripts ./tmp/scripts
 RUN chmod -R 755 ./tmp/scripts
 
-ENTRYPOINT ["./tmp/scripts/start.sh"]
+RUN mkdir /tmp/logs
+
+ENTRYPOINT ["./tmp/scripts/orchestrator.sh"]
