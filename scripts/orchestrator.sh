@@ -1,11 +1,16 @@
 #!/bin/bash
+IFS=$' \t\n'
 
 # constants
 DATE_FORMAT="%Y-%m-%d"
 TIME_FORMAT="%T"
 
 # script arguments
-PERSISTENT=$1
+BIN_CONFIG_FILE=$1
+PERSISTENT=$2
+
+# redirect the orchestrator process logs to a file
+exec &>> "/tmp/logs/orchestrator.txt"
 
 log()
 {
@@ -28,7 +33,8 @@ start_process()
 
 # run all binaries from bin.conf
 start_processes()
-{
+{   
+    log "start_processes() -> Starting processes"
     # iterate through binary names from the configuration file and start each process
     while read line
     do 
@@ -42,12 +48,13 @@ start_processes()
         
         start_process "$bin_name" "$bin_args"
 
-    done < bin.conf
+    done < $BIN_CONFIG_FILE
 }
 
 # Report process statuses (active or inactive) and restart processes from bin.conf that have died
 monitor_processes()
 {
+    log "monitor_process() -> Monitoring"
     while read line
     do 
         # for each line, make an array where each indice is a word on the line
@@ -73,26 +80,27 @@ monitor_processes()
             log "${bin_name} status is ACTIVE"
         fi
      
-    done < bin.conf
+    done < $BIN_CONFIG_FILE
 }
 
 run_task_schedule() 
 {
+    log "run_task_schedule() -> Running tasks"
     monitor_processes
 }
 
-start_task_loop()
+main()
 {
     # start all processes listed in bin.conf
     start_processes
 
     # start.sh must not exit because all processes spawned from it will exit too, since it is PID 1
-    while [[ $1 = "--persistent" ]]
+    while [[ $PERSISTENT = "--persistent" ]]
     do 
         run_task_schedule
         sleep 1 # sleep for 1 second
     done
 }
 
-# the script holds here
-start_task_loop $PERSISTENT
+# the script starts and holds here
+main

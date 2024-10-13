@@ -15,4 +15,4 @@ RUN chmod -R 755 ./tmp/scripts
 
 RUN mkdir /tmp/logs
 
-ENTRYPOINT ["./tmp/scripts/orchestrator.sh"]
+ENTRYPOINT [ "./tmp/scripts/orchestrator.sh", "./tmp/scripts/bin.conf"]

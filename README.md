@@ -4,7 +4,7 @@
 * Edit Date: 2024-10-12
 * Description: This repository builds a docker image that is meant to run a list of binaries.
 
-### Instructions
+## Instructions
 
 * Build Image
     * docker build -t bin-runner -f Dockerfile .
@@ -12,10 +12,6 @@
     * docker run -id --name bin-runner-c1 bin-runner --persistent
         * Note that the "--persistent" flag prevents the "PID 1" (orchestrator.sh) process from exiting.
         * Processes are spawned from "PID 1", so it cannot be allowed to exit if child processes are meant to persist.
-* Run Containter Interactively
-    # Warning
-    * This container is not intended to be run interactively.
-    * docker run -it -id --name bin-runner-c1 bin-runner 
 * Enter Container
     * docker exec -it bin-runner-c1 bin/bash
 * Configuration Guide
