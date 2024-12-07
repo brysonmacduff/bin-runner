@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 RUN apt update -y
-RUN apt install -y nano
+RUN apt install -y nano libspdlog-dev
 
 # copy in local debian packages to the image and install them
 RUN mkdir tmp/debians
